@@ -11,6 +11,10 @@ import { RegisterPage } from "./auth/pages/register/RegisterPage";
 import { DashboardPage } from "./admin/page/dashboard/DashboardPage";
 import { AdminProductsPage } from "./admin/page/products/AdminProductsPage";
 import { AdminProductPage } from "./admin/page/product/AdminProductPage";
+import {
+  AdminRoute,
+  NotAuthenticatedRoute,
+} from "./components/routes/ProtectedRoute";
 
 // Carga perezosa
 const AuthLayout = lazy(() => import("./auth/layouts/AuthLayout"));
@@ -40,7 +44,11 @@ export const appRouter = createBrowserRouter([
   // Auth Routes
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: (
+      <NotAuthenticatedRoute>
+        <AuthLayout />
+      </NotAuthenticatedRoute>
+    ),
     children: [
       {
         index: true,
@@ -60,7 +68,11 @@ export const appRouter = createBrowserRouter([
   // admin Routes
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
     children: [
       {
         index: true,
