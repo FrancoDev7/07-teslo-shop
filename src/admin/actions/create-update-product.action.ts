@@ -3,11 +3,11 @@ import type { Product } from "@/interfaces/product.interface";
 import { sleep } from "@/lib/sleep";
 
 export const createUpdateProductAction = async (
-  productLike: Partial<Product>
+  productLike: Partial<Product> & { files?: File[] }
 ): Promise<Product> => {
   await sleep(1500);
 
-  const { id, user, images = [], ...rest } = productLike;
+  const { id, user, images = [], files = [], ...rest } = productLike;
 
   const isCreating = id === "new";
 
