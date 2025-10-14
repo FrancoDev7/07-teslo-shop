@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { AdminTitle } from "@/admin/components/AdminTitle";
@@ -47,6 +47,10 @@ export const ProductForm = ({
 
   const labelInputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    setFiles([]); // Reset files when product changes
+  }, [product]);
 
   const selectedSizes = watch("sizes");
   const selectedTags = watch("tags");
